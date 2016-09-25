@@ -1,9 +1,5 @@
 # DateUtil
 
-
-
-DateUtil
-
 DONE 
   - impl getCurDate func arg struct tm
 
