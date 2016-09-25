@@ -4,7 +4,7 @@ LFLAGS	= $(BOOST_LIB)
 
 EXEC 	= main
 
-OBJS 	= main.o TimeUtil.o
+OBJS 	= main.o DateUtil.o
 
 .SUFFIXES: .cxx .o .hxx
 

@@ -4,8 +4,8 @@ LFLAGS 		= $(GTEST_LIB)
 
 EXEC 		= test
 
-SRC_OBJS 	= ../src/TimeUtil.o
-OBJS 		= $(SRC_OBJS) TimeUtilTest.o
+SRC_OBJS 	= ../src/DateUtil.o
+OBJS 		= $(SRC_OBJS) DateUtilTest.o
 
 .SUFFIXES: .cxx .o .hxx .pc
 

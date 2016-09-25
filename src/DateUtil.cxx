@@ -1,32 +1,17 @@
-#include "TimeUtil.hxx"
+#include "DateUtil.hxx"
 
-char getDateFormatSymbol(int dateTypesymbol)
-{
-	if(dateTypesymbol >= DateUtil::YEAR && dateTypesymbol <= DateUtil::MSEC)
-		return dateTypeSymbols[dateTypesymbol];
-
-	return NULL;
-}
-
-void TimeUtil::getPridate(char* date, int term)
-{
-	struct tm* now = NULL;
-	getCurTime(&now);
-	sprintf(date, "%04d%02d%02d", now->tm_year + 1900, now->tm_mon + 1, now->tm_mday - term);
-}
-
-void TimeUtil::getCurTime(struct tm** date)
+void DateUtil::getCurDate(struct tm** date)
 {
 	const time_t t = time(0);
 	*date = localtime(&t);
 }
 
+#if 0
 /*
  * @parm	std::string		time		time string(ex : 20160904111201032)
- * @parm	std::string		timeFormat	time format stirng 
- * 										(Year = Y, Month = M, Day = D, 
- * 										Hour = H, Min = M, Sec = S, mSec = s)
- * @return	bool			verify return value;
+ * @parm	TimeFormat		timeFormat	time format obj 
+ *
+ * @return	bool			verify return value
  */
 
 bool TimeUtil::verifyDateStr(const std::string& time, const std::string& timeFormat)
@@ -87,3 +72,5 @@ bool TimeUtil::verifyDateStr(const std::string& time, const std::string& timeFor
 
 	return true;
 }
+
+#endif
