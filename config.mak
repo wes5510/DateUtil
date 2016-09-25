@@ -1,6 +1,8 @@
 #DIR_PATH
-SRC_DIR 	= 	../src
-TESTS_DIR 	= 	../tests
+SRC_DIR 	= 	./src
+TESTS_DIR 	= 	./tests
+LIB_DIR 	= 	./libs
+INCLUDE_DIR =	./include
 
 #INCLUDE
 INCLUDE		+= -I$(SRC_DIR)
