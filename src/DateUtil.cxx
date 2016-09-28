@@ -1,76 +1,81 @@
 #include "DateUtil.hxx"
 
-void DateUtil::getCurDate(struct tm** date)
+void SetError()
+{
+	DateUtil::lastErrorNo = errno;
+	DateUtil::lastErrorStr = strerror(errno);
+}
+
+template<typename T>
+void SetError(DateUtil::ERRNO errno, T value)
+{
+	DateUtil::lastErrorNo = errno;
+	DateUtil::lastErrorStr = DateUtil::ERR_STR_LIST[errno] + "(" + value + ")";
+}
+
+bool DateUtil::getCurDate(struct tm** date)
 {
 	const time_t t = time(0);
 	*date = localtime(&t);
-}
-
-#if 0
-/*
- * @parm	std::string		time		time string(ex : 20160904111201032)
- * @parm	TimeFormat		timeFormat	time format obj 
- *
- * @return	bool			verify return value
- */
-
-bool TimeUtil::verifyDateStr(const std::string& time, const std::string& timeFormat)
-{
-	if(timeFormat.length() != time.length())
+	if(*date == NULL)
+	{
+		SetError();
 		return false;
-
-	if(!verifyDateType(const std::string& timeFormat))
-		return false;
-
-	std::size_t symbolFirstPos = timeFormat.find_first_of(TimeUtil::monthFormatSymbol);
-	std::size_t symbolLastPos = timeFormat.find_last_of(TimeUtil::monthFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxMonth)
-			return false;
-	}
-
-	symbolFirstPos = timeFormat.find_first_of(TimeUtil::dayFormatSymbol);
-	symbolLastPos = timeFormat.find_last_of(TimeUtil::dayFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxDay)
-			return false;
-	}
-
-	symbolFirstPos = timeFormat.find_first_of(TimeUtil::hourFormatSymbol);
-	symbolLastPos = timeFormat.find_last_of(TimeUtil::hourFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxHour)
-			return false;
-	}
-
-	symbolFirstPos = timeFormat.find_first_of(TimeUtil::minFormatSymbol);
-	symbolLastPos = timeFormat.find_last_of(TimeUtil::minFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxMin)
-			return false;
-	}
-
-	symbolFirstPos = timeFormat.find_first_of(TimeUtil::secFormatSymbol);
-	symbolLastPos = timeFormat.find_last_of(TimeUtil::secFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxSec)
-			return false;
-	}
-
-	symbolFirstPos = timeFormat.find_first_of(TimeUtil::mSecFormatSymbol);
-	symbolLastPos = timeFormat.find_last_of(TimeUtil::mSecFormatSymbol);
-	if(symbolFirstPos != std::string::npos && symbolLastPos != std::string::npos)
-	{
-		if(atoi(time.substr(symbolFirstPos, symbolLastPos).c_str()) > maxMSec)
-			return false;
 	}
 
 	return true;
 }
 
-#endif
+bool DateUtil::getPreDay(struct tm* preDate, struct tm* curDate, int termDay)
+{
+	memset(preDate, 0, sizeof(struct tm));
+	time_t curDateTimeT = mktime(curDate);
+	if(curDateTimeT == -1)
+	{
+		SetError();
+		return false;
+	}
+
+	time_t preDateTimeT = curDateTimeT - (termDay * DAY_OF_SEC);
+
+	preDate = localtime(&preDateTimeT);
+	if(preDate == NULL)
+	{
+		SetError();
+		return false;
+	}
+
+	return true;
+}
+
+int DateUtil::getLastDayOfMonth(int year, int month)
+{
+	if(year < 1)
+	{
+		//SetError(INVALID_YEAR, year);
+		return -1;
+	}
+
+	if(month < 1 || month > 13)
+	{
+		SetError(INVALID_MONTH, month);
+		return -1;
+	}
+
+	if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+		return 31;
+	else if(month == 4 || month == 6 || month == 9 || month == 11)
+		return 30;
+	else {
+		if(year % 4 == 0) {
+			if(year % 100 == 0) {
+				if(year % 400 == 0)
+					return 29;
+				return 28;
+			}
+			return 29;
+		}
+		return 28;
+	}
+	return 31;
+}
