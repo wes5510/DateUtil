@@ -6,11 +6,17 @@ void SetError()
 	DateUtil::lastErrorStr = strerror(errno);
 }
 
-template<typename T>
-void SetError(DateUtil::ERRNO errno, T value)
+void SetError(const DateUtil::ERRNO errno, const std::string& value)
 {
 	DateUtil::lastErrorNo = errno;
 	DateUtil::lastErrorStr = DateUtil::ERR_STR_LIST[errno] + "(" + value + ")";
+}
+
+void IntToStr(std::string& str, const int n)
+{
+	std::stringstream ss;
+	ss << n;
+	str = ss.str();
 }
 
 bool DateUtil::getCurDate(struct tm** date)
@@ -19,7 +25,7 @@ bool DateUtil::getCurDate(struct tm** date)
 	*date = localtime(&t);
 	if(*date == NULL)
 	{
-		SetError();
+		::SetError();
 		return false;
 	}
 
@@ -32,7 +38,7 @@ bool DateUtil::getPreDay(struct tm* preDate, struct tm* curDate, int termDay)
 	time_t curDateTimeT = mktime(curDate);
 	if(curDateTimeT == -1)
 	{
-		SetError();
+		::SetError();
 		return false;
 	}
 
@@ -41,7 +47,7 @@ bool DateUtil::getPreDay(struct tm* preDate, struct tm* curDate, int termDay)
 	preDate = localtime(&preDateTimeT);
 	if(preDate == NULL)
 	{
-		SetError();
+		::SetError();
 		return false;
 	}
 
@@ -52,13 +58,17 @@ int DateUtil::getLastDayOfMonth(int year, int month)
 {
 	if(year < 1)
 	{
-		//SetError(INVALID_YEAR, year);
+		std::string tmpStr;
+		::IntToStr(tmpStr, year);
+		::SetError(INVALID_YEAR, tmpStr);
 		return -1;
 	}
 
 	if(month < 1 || month > 13)
 	{
-		SetError(INVALID_MONTH, month);
+		std::string tmpStr;
+		::IntToStr(tmpStr, year);
+		::SetError(INVALID_MONTH, tmpStr);
 		return -1;
 	}
 

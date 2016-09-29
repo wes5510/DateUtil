@@ -8,6 +8,7 @@
 #include <cstring>
 
 #include <string>
+#include <sstream>
 
 namespace DateUtil
 {
