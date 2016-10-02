@@ -79,7 +79,11 @@ int DateUtil::getLastDayOfMonth(int year, int month)
 
 bool DateUtil::varifyStructTm(struct tm* t)
 {
-	if(!varifyYear(t->tm_year) || !varifyMon(t->tm_mon) || !varifyDay(t->tm_mday) || !varifyHour(t->tm_hour) || !varifyMin(t->tm_min) || !varifySec(t->tm_sec) || !varifyWday(t->tm_wday)|| !varifyYday(t->tm_yday) || !varifyIsDst(t->tm_isdst))
+	if(!varifyYear(t->tm_year) 		|| !varifyMon(t->tm_mon) 
+		|| !varifyDay(t->tm_mday) 	|| !varifyHour(t->tm_hour) 
+		|| !varifyMin(t->tm_min) 	|| !varifySec(t->tm_sec) 
+		|| !varifyWday(t->tm_wday) 	|| !varifyYday(t->tm_yday) 
+		|| !varifyIsDst(t->tm_isdst))
 		return false;
 
 	return true;
