@@ -1,11 +1,12 @@
 include ../config.mak
 
 LFLAGS 		= $(GTEST_LIB)
+LFLAGS 		+= -lpthread
 
 EXEC 		= test
 
-SRC_OBJS 	= ../src/DateUtil.o
-OBJS 		= $(SRC_OBJS) DateUtilTest.o
+SRC_OBJS 	= ../src/Error.o ../src/DateUtil.o
+OBJS 		= $(SRC_OBJS) ErrorTest.o DateUtilTest.o 
 
 .SUFFIXES: .cxx .o .hxx .pc
 
@@ -15,7 +16,7 @@ OBJS 		= $(SRC_OBJS) DateUtilTest.o
 all: $(EXEC)
 
 $(EXEC) : $(OBJS)
-	$(CXX) $(LFLAGS) $(OFLAGS) $@ $(OBJS) 
+	$(CXX) $(OFLAGS) $@ $(OBJS) $(LFLAGS)
 
 clean:
 	$(RM) $(EXEC) *.o core.*

@@ -1,14 +1,13 @@
 #ifndef DATE_UTIL_H
 #define DATE_UTIL_H
 
+#include "Error.hxx"
+
 #include <ctime>
 #include <cstdlib>
 #include <cstdio>
-#include <cerrno>
-#include <cstring>
 
 #include <string>
-#include <sstream>
 
 namespace DateUtil
 {
@@ -19,13 +18,12 @@ namespace DateUtil
 		INVALID_DAY
 	};
 
-	const std::string ERR_STR_LIST[] = {"Invalid Year", "Invalid Month", "Invalid Day"};
+	static const std::string ERR_STR_LIST[] = {"Invalid Year", "Invalid Month", "Invalid Day"};
+	static Error error;
 	static const unsigned int DAY_OF_SEC = 86400;
-	static std::string lastErrorStr;
-	static int lastErrorNo;
 	bool getCurDate(struct tm**);
-	bool getPreDay(struct tm* preDate, struct tm* curDate, int termDay);
+	bool getPreDay(struct tm*, struct tm*, int);
 	int getLastDayOfMonth(int, int);
-}
+};
 
 #endif

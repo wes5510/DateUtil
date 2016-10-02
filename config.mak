@@ -1,11 +1,11 @@
 #DIR_PATH
 SRC_DIR 	= 	./src
 TESTS_DIR 	= 	./tests
-LIB_DIR 	= 	./libs
-INCLUDE_DIR =	./include
+LIB_DIR 	= 	../libs
+INCLUDE_DIR =	../include
 
 #INCLUDE
-INCLUDE		+= -I$(SRC_DIR)
+INCLUDE		+= -I.$(SRC_DIR) -I$(INCLUDE_DIR)
 
 #LIB
 GTEST_LIB	= -L$(LIB_DIR)/googletest -lgtest -lgtest_main
