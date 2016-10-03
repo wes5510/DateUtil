@@ -13,6 +13,7 @@ DONE
   - impl unitest varifySec func 
 
 TODO 
+  - impl unitest varifyStructTm func 
   - impl unitest varifyWday func 
   - impl unitest varifyYday func 
   - impl unitest varifyIsdst func 
