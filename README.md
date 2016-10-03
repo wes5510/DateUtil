@@ -12,4 +12,3 @@ TODO
   - impl unitest getPreDay() func exception
   - impl unitest getLastDayOfMonth() func exception
   - impl strftime wrapper func 
-  - impl convertUTC() arg struct tm, timezone
