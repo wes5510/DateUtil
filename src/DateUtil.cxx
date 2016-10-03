@@ -83,7 +83,7 @@ bool DateUtil::varifyStructTm(struct tm* t)
 		|| !varifyDay(t->tm_mday) 	|| !varifyHour(t->tm_hour) 
 		|| !varifyMin(t->tm_min) 	|| !varifySec(t->tm_sec) 
 		|| !varifyWday(t->tm_wday) 	|| !varifyYday(t->tm_yday) 
-		|| !varifyIsDst(t->tm_isdst))
+		|| !varifyIsdst(t->tm_isdst))
 		return false;
 
 	return true;
@@ -99,7 +99,7 @@ bool DateUtil::varifyYear(int year)
 	return true;
 }
 
-bool DateUtil::varifyMonth(unsigned short month)
+bool DateUtil::varifyMonth(int month)
 {
 	if(month < MIN_MONTH || month > MAX_MONTH)
 	{
@@ -109,7 +109,7 @@ bool DateUtil::varifyMonth(unsigned short month)
 	return true;
 }
 
-bool DateUtil::varifyDay(unsigned short day)
+bool DateUtil::varifyDay(int day)
 {
 	if(day < MIN_DAY || day > MAX_DAY)
 	{
@@ -119,7 +119,7 @@ bool DateUtil::varifyDay(unsigned short day)
 	return true;
 }
 
-bool DateUtil::varifyHour(unsigned short hour)
+bool DateUtil::varifyHour(int hour)
 {
 	if(hour < MIN_HOUR || hour > MAX_HOUR)
 	{
@@ -129,7 +129,7 @@ bool DateUtil::varifyHour(unsigned short hour)
 	return true;
 }
 
-bool DateUtil::varifyMin(unsigned short min)
+bool DateUtil::varifyMin(int min)
 {
 	if(min < MIN_MIN || min > MAX_MIN)
 	{
@@ -139,7 +139,7 @@ bool DateUtil::varifyMin(unsigned short min)
 	return true;
 }
 
-bool DateUtil::varifySec(unsigned short sec)
+bool DateUtil::varifySec(int sec)
 {
 	if(sec < MIN_SEC || sec > MAX_SEC)
 	{
@@ -149,7 +149,7 @@ bool DateUtil::varifySec(unsigned short sec)
 	return true;
 }
 
-bool DateUtil::varifyWday(unsigned short wday)
+bool DateUtil::varifyWday(int wday)
 {
 	if(wday < MIN_WDAY || wday > MAX_WDAY)
 	{
@@ -159,7 +159,7 @@ bool DateUtil::varifyWday(unsigned short wday)
 	return true;
 }
 
-bool DateUtil::varifyYday(unsigned short yday)
+bool DateUtil::varifyYday(int yday)
 {
 	if(yday < MIN_YDAY || yday > MAX_YDAY)
 	{
@@ -169,7 +169,7 @@ bool DateUtil::varifyYday(unsigned short yday)
 	return true;
 }
 
-bool DateUtil::varifyIsDst(unsigned short isdst)
+bool DateUtil::varifyIsdst(int isdst)
 {
 	if(isdst < MIN_ISDST)
 	{

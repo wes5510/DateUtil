@@ -163,3 +163,54 @@ TEST(DateUtilTest, varifySecTest)
 	sec = 62;
 	ASSERT_FALSE(DateUtil::varifySec(sec));
 }
+
+TEST(DateUtilTest, varifyWdayTest)
+{
+	int wday = 0;
+	ASSERT_TRUE(DateUtil::varifyWday(wday));
+
+	wday = 6;
+	ASSERT_TRUE(DateUtil::varifyWday(wday));
+
+	wday = 3;
+	ASSERT_TRUE(DateUtil::varifyWday(wday));
+
+	wday = -1;
+	ASSERT_FALSE(DateUtil::varifyWday(wday));
+
+	wday = 7;
+	ASSERT_FALSE(DateUtil::varifyWday(wday));
+}
+
+TEST(DateUtilTest, varifyYdayTest)
+{
+	int yday = 0;
+	ASSERT_TRUE(DateUtil::varifyYday(yday));
+
+	yday = 6;
+	ASSERT_TRUE(DateUtil::varifyYday(yday));
+
+	yday = 150;
+	ASSERT_TRUE(DateUtil::varifyYday(yday));
+
+	yday = -1;
+	ASSERT_FALSE(DateUtil::varifyYday(yday));
+
+	yday = 366;
+	ASSERT_FALSE(DateUtil::varifyYday(yday));
+}
+
+TEST(DateUtilTest, varifyIsdstTest)
+{
+	int isdst = 0;
+	ASSERT_TRUE(DateUtil::varifyIsdst(isdst));
+
+	isdst = 10;
+	ASSERT_TRUE(DateUtil::varifyIsdst(isdst));
+
+	isdst = -1;
+	ASSERT_FALSE(DateUtil::varifyIsdst(isdst));
+
+	isdst = -125;
+	ASSERT_FALSE(DateUtil::varifyIsdst(isdst));
+}

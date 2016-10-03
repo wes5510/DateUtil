@@ -50,14 +50,14 @@ namespace DateUtil
 	int getLastDayOfMonth(int, int);
 	bool varifyStructTm(struct tm* t);
 	bool varifyYear(int);
-	bool varifyMonth(unsigned short);
-	bool varifyDay(unsigned short);
-	bool varifyHour(unsigned short);
-	bool varifyMin(unsigned short);
-	bool varifySec(unsigned short);
-	bool varifyWday(unsigned short);
-	bool varifyYday(unsigned short);
-	bool varifyIsDst(unsigned short);
+	bool varifyMonth(int);
+	bool varifyDay(int);
+	bool varifyHour(int);
+	bool varifyMin(int);
+	bool varifySec(int);
+	bool varifyWday(int);
+	bool varifyYday(int);
+	bool varifyIsdst(int);
 };
 
 #endif

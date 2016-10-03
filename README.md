@@ -12,12 +12,12 @@ DONE
   - impl unitest varifyHour func 
   - impl unitest varifyMin func 
   - impl unitest varifySec func 
-
-TODO 
-  - impl unitest varifyStructTm func 
   - impl unitest varifyWday func 
   - impl unitest varifyYday func 
   - impl unitest varifyIsdst func 
+
+TODO 
+  - impl unitest varifyStructTm func 
   - impl unitest getPreDay() func exception
   - impl unitest getLastDayOfMonth() func exception
   - impl strftime wrapper func 
