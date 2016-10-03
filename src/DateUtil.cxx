@@ -56,7 +56,7 @@ bool DateUtil::getPreDate(struct tm* preDate, struct tm* curDate, int termDay)
 
 int DateUtil::getLastDayOfMonth(int year, int month)
 {
-	if(!varifyYear(year) || !varifyMon(month))
+	if(!varifyYear(year) || !varifyMonth(month))
 		return -1;
 
 	if(month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
@@ -79,7 +79,7 @@ int DateUtil::getLastDayOfMonth(int year, int month)
 
 bool DateUtil::varifyStructTm(struct tm* t)
 {
-	if(!varifyYear(t->tm_year) 		|| !varifyMon(t->tm_mon) 
+	if(!varifyYear(t->tm_year) 		|| !varifyMonth(t->tm_mon) 
 		|| !varifyDay(t->tm_mday) 	|| !varifyHour(t->tm_hour) 
 		|| !varifyMin(t->tm_min) 	|| !varifySec(t->tm_sec) 
 		|| !varifyWday(t->tm_wday) 	|| !varifyYday(t->tm_yday) 
@@ -91,7 +91,7 @@ bool DateUtil::varifyStructTm(struct tm* t)
 
 bool DateUtil::varifyYear(int year)
 {
-	if(year < 0)
+	if(year < MIN_YEAR)
 	{
 		ERROR.set(INVALID_YEAR, ERR_STR_LIST[INVALID_YEAR]);
 		return false;
@@ -99,9 +99,9 @@ bool DateUtil::varifyYear(int year)
 	return true;
 }
 
-bool DateUtil::varifyMon(int mon)
+bool DateUtil::varifyMonth(unsigned short month)
 {
-	if(mon < 0 || mon > 11)
+	if(month < MIN_MONTH || month > MAX_MONTH)
 	{
 		ERROR.set(INVALID_MONTH, ERR_STR_LIST[INVALID_MONTH]);
 		return false;
@@ -109,9 +109,9 @@ bool DateUtil::varifyMon(int mon)
 	return true;
 }
 
-bool DateUtil::varifyDay(int day)
+bool DateUtil::varifyDay(unsigned short day)
 {
-	if(day < 1 || day > 31)
+	if(day < MIN_DAY || day > MAX_DAY)
 	{
 		ERROR.set(INVALID_DAY, ERR_STR_LIST[INVALID_DAY]);
 		return false;
@@ -119,9 +119,9 @@ bool DateUtil::varifyDay(int day)
 	return true;
 }
 
-bool DateUtil::varifyHour(int hour)
+bool DateUtil::varifyHour(unsigned short hour)
 {
-	if(hour < 0 || hour > 23)
+	if(hour < MIN_HOUR || hour > MAX_HOUR)
 	{
 		ERROR.set(INVALID_HOUR, ERR_STR_LIST[INVALID_HOUR]);
 		return false;
@@ -129,9 +129,9 @@ bool DateUtil::varifyHour(int hour)
 	return true;
 }
 
-bool DateUtil::varifyMin(int min)
+bool DateUtil::varifyMin(unsigned short min)
 {
-	if(min < 0 || min > 59)
+	if(min < MIN_MIN || min > MAX_MIN)
 	{
 		ERROR.set(INVALID_MIN, ERR_STR_LIST[INVALID_MIN]);
 		return false;
@@ -139,9 +139,9 @@ bool DateUtil::varifyMin(int min)
 	return true;
 }
 
-bool DateUtil::varifySec(int sec)
+bool DateUtil::varifySec(unsigned short sec)
 {
-	if(sec < 0 || sec > 61)
+	if(sec < MIN_SEC || sec > MAX_SEC)
 	{
 		ERROR.set(INVALID_SEC, ERR_STR_LIST[INVALID_SEC]);
 		return false;
@@ -149,9 +149,9 @@ bool DateUtil::varifySec(int sec)
 	return true;
 }
 
-bool DateUtil::varifyWday(int wday)
+bool DateUtil::varifyWday(unsigned short wday)
 {
-	if(wday < 0 || wday > 6)
+	if(wday < MIN_WDAY || wday > MAX_WDAY)
 	{
 		ERROR.set(INVALID_WDAY, ERR_STR_LIST[INVALID_WDAY]);
 		return false;
@@ -159,9 +159,9 @@ bool DateUtil::varifyWday(int wday)
 	return true;
 }
 
-bool DateUtil::varifyYday(int yday)
+bool DateUtil::varifyYday(unsigned short yday)
 {
-	if(yday < 0 || yday > 365)
+	if(yday < MIN_YDAY || yday > MAX_YDAY)
 	{
 		ERROR.set(INVALID_YDAY, ERR_STR_LIST[INVALID_YDAY]);
 		return false;
@@ -169,9 +169,9 @@ bool DateUtil::varifyYday(int yday)
 	return true;
 }
 
-bool DateUtil::varifyIsDst(int isdst)
+bool DateUtil::varifyIsDst(unsigned short isdst)
 {
-	if(isdst < 0)
+	if(isdst < MIN_ISDST)
 	{
 		ERROR.set(INVALID_ISDST, ERR_STR_LIST[INVALID_ISDST]);
 		return false;
