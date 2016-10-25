@@ -16,8 +16,5 @@ DONE
   - impl unitest varifyYday func 
   - impl unitest varifyIsdst func 
   - impl unitest varifyStructTm func 
-
-TODO 
   - impl unitest getPreDay() func exception
   - impl unitest getLastDayOfMonth() func exception
-  - impl strftime wrapper func 
