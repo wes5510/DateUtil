@@ -28,17 +28,25 @@ TEST(DateUtilTest, getPreDayTest)
 	date.tm_mday = 1;
 
 	struct tm preDate;
-	DateUtil::getPreDate(&preDate, &date, 1);
+	ASSERT_TRUE(DateUtil::getPreDate(&preDate, &date, 1));
 
 	ASSERT_EQ(preDate.tm_year, 115);
 	ASSERT_EQ(preDate.tm_mon, 11);
 	ASSERT_EQ(preDate.tm_mday, 31);
 
-	DateUtil::getPreDate(&preDate, &date, 600);
+	ASSERT_TRUE(DateUtil::getPreDate(&preDate, &date, 600));
 
 	ASSERT_EQ(preDate.tm_year, 114);
 	ASSERT_EQ(preDate.tm_mon, 4);
 	ASSERT_EQ(preDate.tm_mday, 11);
+
+	date.tm_year = 0;
+	date.tm_mon = -1;
+
+	ASSERT_FALSE(DateUtil::getPreDate(&preDate, &date, 600));
+	std::pair<int, std::string> er;
+	DateUtil::ERROR.get(er);
+	ASSERT_EQ(er.first, DateUtil::INVALID_YEAR);
 }
 
 TEST(DateUtilTest, getLastDayOfMonthTest)
@@ -213,4 +221,17 @@ TEST(DateUtilTest, varifyIsdstTest)
 
 	isdst = -125;
 	ASSERT_FALSE(DateUtil::varifyIsdst(isdst));
+}
+
+TEST(DateUtilTest,varifyStructTmTest)
+{
+	struct tm t = {0};
+	DateUtil::getCurDate(&t);
+	ASSERT_TRUE(DateUtil::varifyStructTm(&t));
+
+	t.tm_year = -1;
+	ASSERT_FALSE(DateUtil::varifyStructTm(&t));
+
+	t.tm_mon = -1;
+	ASSERT_FALSE(DateUtil::varifyStructTm(&t));
 }

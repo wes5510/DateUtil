@@ -12,7 +12,7 @@ class Error
 		std::pair<int, std::string> errorVal_;
 	public:
 		void set();
-		void set(int errno_, const std::string& str);
+		void set(const int errno_, const std::string& errStr);
 		std::pair<int, std::string>& get();
 		void get(std::pair<int, std::string>& errorVal);
 };

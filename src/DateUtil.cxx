@@ -44,10 +44,16 @@ bool DateUtil::getPreDate(struct tm* preDate, struct tm* curDate, int termDay)
 
 	time_t preDateTimeT = curDateTimeT - (termDay * DAY_OF_SEC);
 
-	memcpy(preDate ,localtime(&preDateTimeT),sizeof(struct tm));
+	memcpy(preDate ,localtime(&preDateTimeT), sizeof(struct tm));
 	if(preDate == NULL)
 	{
 		ERROR.set();
+		return false;
+	}
+
+	if(!varifyStructTm(preDate))
+	{
+		memset(preDate, 0, sizeof(struct tm));
 		return false;
 	}
 
@@ -75,6 +81,11 @@ int DateUtil::getLastDayOfMonth(int year, int month)
 		return 28;
 	}
 	return 31;
+}
+
+bool DateUtil::tmToStr(std::string tmStr, struct tm& t)
+{
+	strftime();
 }
 
 bool DateUtil::varifyStructTm(struct tm* t)

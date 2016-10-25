@@ -31,3 +31,11 @@ TEST(ErrorTest, setSysErrorTest)
 	ASSERT_EQ(error.get().first, errno);
 	ASSERT_STREQ(error.get().second.c_str(), strerror(errno));
 }
+
+TEST(ErrorTest, setCustomErrorTest)
+{
+	Error error;
+	error.set(1, "error");
+	ASSERT_EQ(error.get().first, 1);
+	ASSERT_STREQ(error.get().second.c_str(), "error");
+}

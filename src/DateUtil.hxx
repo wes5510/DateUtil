@@ -41,13 +41,16 @@ namespace DateUtil
 		INVALID_ISDST,
 	};
 
-	static const std::string ERR_STR_LIST[] = {"Invalid Year", "Invalid Month", "Invalid Day", "Invalid Hour", "Invalid Min", "Invalid Sec", "Invalid Wday", "Invalid Yday", "Invalid Isdst"};
+	static const std::string ERR_STR_LIST[] = {"Invalid Year", "Invalid Month", "Invalid Day", "Invalid Hour"
+												, "Invalid Min", "Invalid Sec", "Invalid Wday", "Invalid Yday"
+												, "Invalid Isdst"};
 	static Error ERROR;
 	static const unsigned int DAY_OF_SEC = 86400;
 	bool getCurDate(struct tm*);
 	bool getLocalTime(struct tm**);
 	bool getPreDate(struct tm*, struct tm*, int);
-	int getLastDayOfMonth(int, int);
+	int  getLastDayOfMonth(int, int);
+	bool tmToStr(std::string tmStr, struct tm& t);
 	bool varifyStructTm(struct tm* t);
 	bool varifyYear(int);
 	bool varifyMonth(int);
