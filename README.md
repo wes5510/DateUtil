@@ -18,3 +18,5 @@ DONE
   - impl unitest varifyStructTm func 
   - impl unitest getPreDay() func exception
   - impl unitest getLastDayOfMonth() func exception
+  
+  test
